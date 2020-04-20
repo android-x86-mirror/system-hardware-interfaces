@@ -82,12 +82,14 @@ class SystemSuspend : public ISystemSuspend {
 
    private:
     void initAutosuspend();
+    const std::string &getSleepState();
 
     std::mutex mCounterLock;
     std::condition_variable mCounterCondVar;
     uint32_t mSuspendCounter;
     unique_fd mWakeupCountFd;
     unique_fd mStateFd;
+    std::string mSleepState;
 
     // mStats can be inconsistent with with mSuspendCounter since we use two separate locks to
     // protect these. However, since mStats is only for debugging we prioritize performance.
