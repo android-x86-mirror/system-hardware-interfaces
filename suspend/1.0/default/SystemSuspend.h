@@ -46,6 +46,7 @@ using WakeLockIdType = std::string;
 
 using namespace std::chrono_literals;
 
+class PowerbtndThread;
 class SystemSuspend;
 
 std::string readFd(int fd);
@@ -90,6 +91,7 @@ class SystemSuspend : public ISystemSuspend {
     unique_fd mWakeupCountFd;
     unique_fd mStateFd;
     std::string mSleepState;
+    PowerbtndThread *mPwrbtnd;
 
     // mStats can be inconsistent with with mSuspendCounter since we use two separate locks to
     // protect these. However, since mStats is only for debugging we prioritize performance.
